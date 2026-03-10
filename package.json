@@ -1,0 +1,22 @@
+{
+  "name": "bumiya-pos",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd frontend && npm start",
+    "backend": "cd backend && python app.py",
+    "install:all": "cd frontend && npm install",
+    "start": "start.bat",
+    "build:web": "cd frontend && npm run build",
+    "build:web:prod": "cross-env REACT_APP_API_URL=%npm_config_apiurl% npm --prefix frontend run build",
+    "deploy:firebase": "npm run build:web && npx firebase-tools deploy --only hosting",
+    "deploy:firebase:prod": "cross-env REACT_APP_API_URL=%npm_config_apiurl% npm --prefix frontend run build && npx firebase-tools deploy --only hosting",
+    "deploy:preview": "cross-env REACT_APP_API_URL=%npm_config_apiurl% npm --prefix frontend run build && npx firebase-tools hosting:channel:deploy preview --expires 7d",
+    "deploy:preview:qa": "cross-env REACT_APP_API_URL=%npm_config_apiurl% npm --prefix frontend run build && npx firebase-tools hosting:channel:deploy qa --expires 14d",
+    "deploy:backend:cloudrun": "gcloud run deploy pos-billing-api --source backend --region asia-south1 --allow-unauthenticated"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "firebase": "^12.10.0"
+  }
+}

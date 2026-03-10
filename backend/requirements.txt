@@ -1,0 +1,4 @@
+flask
+flask-cors
+gunicorn
+pywin32; platform_system == "Windows"
